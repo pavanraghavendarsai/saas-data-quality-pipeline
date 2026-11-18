@@ -218,4 +218,23 @@ Potential future extensions include:
    uv run python src/data_cleaning.py
    ```
 
-4. 5. The cleaned files are saved to `data/processed/`.
+4. The cleaned files are saved to `data/processed/`.
+
+### Load the Cleaned Data into PostgreSQL
+
+`src/data_ingestion.py` reads the five CSV files in `data/processed/` and writes each one to a PostgreSQL table with the same name, without the `.csv` extension. Each run drops and recreates the tables, so running it again gives the same result.
+
+Before you run it:
+
+1. Start a PostgreSQL 18 container with `POSTGRES_USER=root`, `POSTGRES_PASSWORD=root`, and `POSTGRES_DB=saas_production_grade`, mapping port `5432`.
+2. Make sure `data/processed/` exists. Run the cleaning script first if it doesn't.
+
+Then run this from the project root:
+
+```bash
+uv run python src/data_ingestion.py
+```
+
+Each table prints a `table created:` line when it's written.
+
+The connection string is written directly in the script. That's fine for a local learning setup, but move the credentials into an environment variable before sharing the project.
