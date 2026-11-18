@@ -27,7 +27,10 @@ for file in file_names:
 
 
 # Connection to the Postgres container: user root, password root, database saas_production_grade, port 5432.
-engine=create_engine('postgresql+psycopg://root:root@localhost:5432/saas_production_grade')
+# The host comes from the DB_HOST environment variable. It defaults to localhost when running on your computer.
+# Inside Docker Compose, DB_HOST is set to "postgres", the name of the database service.
+db_host=os.environ.get('DB_HOST', 'localhost')
+engine=create_engine(f'postgresql+psycopg://root:root@{db_host}:5432/saas_production_grade')
 
 # Write each DataFrame to a table of the same name. 'replace' drops and recreates the table on every run.
 for single_table in tables.items() :
