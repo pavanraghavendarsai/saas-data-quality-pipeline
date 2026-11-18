@@ -53,7 +53,6 @@ Cleaning-data-with-python/
 ├── src/
 │   └── data_cleaning.py
 │
-├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
@@ -147,32 +146,22 @@ git clone https://github.com/pavanraghavendarsai/Cleaning-data-with-python.git
 cd Cleaning-data-with-python
 ```
 
-### Step 3: Create a Virtual Environment
+### Step 3: Install uv and Dependencies
+
+Install [uv](https://docs.astral.sh/uv/), then run this from the project root (the folder that contains `pyproject.toml`):
 
 ```bash
-python -m venv .venv
+uv sync
 ```
 
-### Step 4: Activate the Virtual Environment
+This creates a `.venv/` folder and installs the packages listed in `pyproject.toml`. There is no need to activate the environment manually; `uv run` uses it automatically.
 
-Windows PowerShell:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-### Step 5: Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 6: Run the Cleaning Pipeline
+### Step 4: Run the Cleaning Pipeline
 
 Run this command from the project's root directory:
 
 ```bash
-python src/data_cleaning.py
+uv run python src/data_cleaning.py
 ```
 
 The script reads the original CSV files from `data/raw/`, performs cleaning and validation, and exports the resulting datasets into `data/processed/`.
@@ -217,23 +206,16 @@ Potential future extensions include:
    cd Cleaning-data-with-python
    ```
 
-2. (Optional) Create and activate a virtual environment:
+2. Install [uv](https://docs.astral.sh/uv/), then install the dependencies from the project root (the folder that contains `pyproject.toml`):
 
    ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # Windows: .venv\Scripts\activate
+   uv sync
    ```
 
-3. Install dependencies (requires pandas 2.0 or later):
+3. Run the cleaning script:
 
    ```bash
-   pip install -r requirements.txt
+   uv run python src/data_cleaning.py
    ```
 
-4. Run the cleaning script from the project root folder:
-
-   ```bash
-   python src/data_cleaning.py
-   ```
-
-5. The cleaned files are saved to `data/processed/`.
+4. 5. The cleaned files are saved to `data/processed/`.
