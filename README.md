@@ -33,7 +33,7 @@ The project works with five CSV datasets:
 ## 3. Project Structure
 
 ```text
-Cleaning-data-with-python/
+saas-data-quality-pipeline/
 │
 ├── data/
 │   ├── raw/
@@ -137,13 +137,13 @@ Follow these steps to run the project locally.
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/pavanraghavendarsai/Cleaning-data-with-python.git
+git clone https://github.com/pavanraghavendarsai/saas-data-quality-pipeline.git
 ```
 
 ### Step 2: Navigate into the Project
 
 ```bash
-cd Cleaning-data-with-python
+cd saas-data-quality-pipeline
 ```
 
 ### Step 3: Install uv and Dependencies
@@ -202,8 +202,8 @@ Potential future extensions include:
 1. Clone the repository and move into the project folder:
 
    ```bash
-   git clone https://github.com/pavanraghavendarsai/Cleaning-data-with-python.git
-   cd Cleaning-data-with-python
+   git clone https://github.com/pavanraghavendarsai/saas-data-quality-pipeline.git
+   cd saas-data-quality-pipeline
    ```
 
 2. Install [uv](https://docs.astral.sh/uv/), then install the dependencies from the project root (the folder that contains `pyproject.toml`):
