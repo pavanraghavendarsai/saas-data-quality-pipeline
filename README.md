@@ -238,3 +238,16 @@ uv run python src/data_ingestion.py
 Each table prints a `table created:` line when it's written.
 
 The connection string is written directly in the script. That's fine for a local learning setup, but move the credentials into an environment variable before sharing the project.
+
+### Start PostgreSQL and pgAdmin with Docker Compose
+
+`docker_compose.yaml` starts a PostgreSQL 18 database and a pgAdmin web interface.
+
+```bash
+docker compose up -d
+```
+
+- PostgreSQL: `localhost:5432`, user `root`, password `root`, database `saas_production_grade`
+- pgAdmin: http://localhost:8085, login `admin@admin.com` / `root`. Connect to the server with host `postgres` and port `5432`, since pgAdmin reaches the database over the Compose network.
+
+Stop the services with `docker compose down`. Data is kept in named volumes, so it survives a stop. Use `docker compose down -v` only if you want to delete the data.

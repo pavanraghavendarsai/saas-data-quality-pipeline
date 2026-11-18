@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: saas_postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: saas_production_grade
+    ports:
+      - "5432:5432"
+    volumes:
+      - saas_data:/var/lib/postgresql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: saas_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "8085:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  saas_data:
+  pgadmin_data:
