@@ -251,3 +251,30 @@ docker compose up -d
 - pgAdmin: http://localhost:8085, login `admin@admin.com` / `root`. Connect to the server with host `postgres` and port `5432`, since pgAdmin reaches the database over the Compose network.
 
 Stop the services with `docker compose down`. Data is kept in named volumes, so it survives a stop. Use `docker compose down -v` only if you want to delete the data.
+
+### Run the Pipeline in Docker
+
+Create a `.env` file in the repo root (git ignores it) with these variables:
+
+```
+POSTGRES_USER=root
+POSTGRES_PASSWORD=root
+POSTGRES_DB=saas_production_grade
+PGADMIN_DEFAULT_EMAIL=admin@admin.com
+PGADMIN_DEFAULT_PASSWORD=root
+```
+
+Start the database, then build the pipeline image from the repo root:
+
+```bash
+docker compose -f docker_compose.yaml up -d
+docker build -f Docker/Dockerfile -t saas-pipeline .
+```
+
+Run the pipeline on the Compose network. `DB_HOST=postgres` points it at the database container:
+
+```bash
+docker run --rm --env-file .env -e DB_HOST=postgres --network saasproductiongradeproject_default saas-pipeline
+```
+
+The container runs the cleaning script, then the ingestion script, and prints a `table created:` line for each table.
